@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Aha! Academy - Liderança e Desenvolvimento Pessoal</title>
+
+    <meta name="description"
+        content="Plataforma de cursos online sobre liderança consciente, desenvolvimento pessoal e inteligência emocional. Transforme sua carreira com a Aha! Academy.">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="icon" type="image/png" href="img/logo-48x48.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="loading-screen" class="loading-screen active" aria-hidden="false" aria-label="Carregando aplicativo">
+        <div class="spinner"></div>
+        <p>Carregando Aha! Academy...</p>
+    </div>
+
+    <div id="app-container" class="app-container" aria-hidden="true">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="img/logo-192x192.png" alt="Logo Aha! Academy" class="app-logo">
+                <h2 class="app-title">Aha! Academy</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#home" class="nav-link active" data-screen="home"><i class="fas fa-home"></i> Início</a>
+                <a href="#cursos" class="nav-link" data-screen="cursos"><i class="fas fa-book-open"></i> Meus Cursos</a>
+                <a href="#premium" class="nav-link premium-link" data-screen="premium"><i class="fas fa-star"></i> **Premium**</a>
+                <a href="#comunidade" class="nav-link" data-screen="comunidade"><i class="fas fa-users"></i> Comunidade</a>
+                <a href="#progresso" class="nav-link" data-screen="progresso"><i class="fas fa-chart-line"></i> Progresso</a>
+                <a href="#configuracoes" class="nav-link" data-screen="configuracoes"><i class="fas fa-cog"></i> Configurações</a>
+                <a href="#ajuda" class="nav-link" data-screen="ajuda"><i class="fas fa-question-circle"></i> Ajuda & FAQ</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <img src="img/default-user.webp" alt="Avatar do Usuário" class="user-avatar" id="user-avatar-sidebar">
+                    <div class="user-details">
+                        <span id="user-name-sidebar">João Silva</span>
+                        <small id="user-email-sidebar">joao@email.com</small>
+                    </div>
+                </div>
+                <button class="btn-logout" id="logout-btn">Sair</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section id="home" class="app-screen active">
+                <header class="screen-header">
+                    <h1>Bem-vindo(a), <span id="welcome-user-name">João!</span></h1>
+                    <button id="show-sidebar-btn" class="btn-icon mobile-only" aria-label="Abrir Menu"><i class="fas fa-bars"></i></button>
+                </header>
+                <div class="content-area">
+                    <div class="hero-carousel card" id="hero-carousel" 
+                        role="region" 
+                        aria-label="Destaques e Novidades">
+                        <div class="carousel-track" 
+                            id="carousel-track" 
+                            aria-live="polite">
+                            <div class="carousel-item" style="background-image: url('img/hero1.webp');">
+                                <h2>Curso de Liderança Consciente</h2>
+                                <p>Comece a transformar sua carreira hoje mesmo.</p>
+                                <button class="btn-primary">Continuar Estudando</button>
+                            </div>
+                            <div class="carousel-item" style="background-image: url('img/hero2.webp');">
+                                <h2>Nova Trilha: Inteligência Emocional</h2>
+                                <p>Domine suas emoções e melhore seus relacionamentos.</p>
+                                <button class="btn-secondary">Explorar Agora</button>
+                            </div>
+                            <div class="carousel-item" style="background-image: url('img/hero3.webp');">
+                                <h2>Seu Progresso de Estudo</h2>
+                                <p>Você tem um *streak* de <span id="home-streak-display">0</span> dias!</p>
+                                <button class="btn-primary">Ver Progresso</button>
+                            </div>
+                        </div>
+                        <div class="carousel-dots" id="carousel-dots"></div>
+                    </div>
+                    <div class="progress-summary card">
+                        <h3>Minha Dedicação</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <i class="fas fa-calendar-check icon-lg success"></i>
+                                <span class="stat-value" id="streak-value">0</span>
+                                <small class="stat-label">Dias de Streak</small>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-clock icon-lg primary"></i>
+                                <span class="stat-value" id="time-value">0h 0m</span>
+                                <small class="stat-label">Tempo de Estudo</small>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-medal icon-lg secondary"></i>
+                                <span class="stat-value" id="lessons-completed-value">0</span>
+                                <small class="stat-label">Lições Concluídas</small>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="section-title">Continue de Onde Parou</h2>
+                    <div class="course-list-horizontal" id="continue-course-list">
+                        <p class="empty-state-small">Nenhum curso em andamento. Comece um novo agora!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cursos" class="app-screen">
+                <header class="screen-header"><h1>Meus Cursos</h1></header>
+                <div class="content-area">
+                    <div class="filters-bar" id="filters-bar">
+                        <select id="filter-level" class="filter-select">
+                            <option value="all">Todos os Níveis</option>
+                            <option value="iniciante">Iniciante</option>
+                            <option value="intermediario">Intermediario</option>
+                            <option value="avancado">Avançado</option>
+                        </select>
+                        <select id="filter-topic" class="filter-select">
+                            <option value="all">Todos os Tópicos</option>
+                            <option value="lideranca">Liderança</option>
+                            <option value="emocional">Inteligência Emocional</option>
+                            <option value="carreira">Carreira</option>
+                            <option value="produtividade">Produtividade</option>
+                        </select>
+                        <button class="btn btn-primary" id="apply-filters-btn">
+                            <i class="fas fa-filter"></i> Filtrar
+                        </button>
+                    </div>
+                    
+                    <div class="course-grid full-catalog" id="main-course-grid">
+                        <div class="course-card large" data-course-id="lideranca" data-progress="75">
+                            <img src="img/course1.webp" alt="Capa Liderança Consciente">
+                            <div class="card-content">
+                                <h3>Liderança Consciente</h3>
+                                <p class="course-description">Desenvolva líderes mais empáticos e eficazes.</p>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
+                                <small>75% concluído</small>
+                                <button class="btn-primary btn-block" data-action="open-course" data-course-id="lideranca">Continuar</button>
+                            </div>
+                        </div>
+                        <div class="course-card large" data-course-id="emocional" data-progress="20">
+                            <img src="img/course2.webp" alt="Capa Inteligência Emocional">
+                            <div class="card-content">
+                                <h3>Inteligência Emocional</h3>
+                                <p class="course-description">Aprenda a gerenciar suas emoções sob pressão.</p>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 20%;"></div></div>
+                                <small>20% concluído</small>
+                                <button class="btn-primary btn-block" data-action="open-course" data-course-id="emocional">Continuar</button>
+                            </div>
+                        </div>
+                        <div class="course-card large" data-course-id="carreira" data-progress="0">
+                            <img src="img/course3.webp" alt="Capa Gestão de Carreira">
+                            <div class="card-content">
+                                <h3>Gestão de Carreira</h3>
+                                <p class="course-description">Estratégias para acelerar seu desenvolvimento profissional.</p>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 0%;"></div></div>
+                                <small>0% concluído</small>
+                                <button class="btn-secondary btn-block" data-action="open-course" data-course-id="carreira">Iniciar Curso</button>
+                            </div>
+                        </div>
+                        <div class="course-card large" data-course-id="produtividade" data-progress="0">
+                            <img src="img/course4.webp" alt="Capa Produtividade Sem Estresse">
+                            <div class="card-content">
+                                <h3>Produtividade Sem Estresse</h3>
+                                <p class="course-description">Organize sua rotina e conquiste o equilíbrio.</p>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 0%;"></div></div>
+                                <small>0% concluído</small>
+                                <button class="btn-secondary btn-block" data-action="open-course" data-course-id="produtividade">Iniciar Curso</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="plataforma" class="app-screen lesson-detail-screen">
+                <header class="screen-header">
+                    <button id="back-to-cursos" class="btn-icon"><i class="fas fa-arrow-left"></i></button>
+                    <h1><span id="current-course-title">Curso</span>: <span id="current-lesson-title">Lição</span></h1>
+                </header>
+                <div class="content-area lesson-content-grid">
+                    <div class="lesson-main">
+                        <div class="card video-container">
+                            <iframe id="lesson-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="lesson-details card">
+                            <p id="lesson-description">Descrição da lição.</p>
+                            <div class="action-buttons">
+                                <button class="btn-primary" id="mark-complete-btn">
+                                    <i class="fas fa-check-circle"></i> Marcar como Concluída
+                                </button>
+                                <button class="btn-secondary" id="download-materials-btn">
+                                    <i class="fas fa-download"></i> Materiais de Apoio
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card lesson-notes-area">
+                            <h3>Minhas Anotações</h3>
+                            <textarea id="lesson-notes-textarea" placeholder="Digite suas anotações aqui..."></textarea>
+                            <button class="btn-primary" id="save-notes-btn">Salvar Anotações</button>
+                        </div>
+                    </div>
+                    <div class="lesson-sidebar card">
+                        <h3>Módulos do Curso</h3>
+                        <div class="module-list" id="lesson-module-list">
+                            </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="progresso" class="app-screen">
+                <header class="screen-header"><h1>Meu Progresso</h1></header>
+                <div class="content-area">
+                    <div class="progress-grid">
+                        <div class="progress-summary card">
+                            <h3>Visão Geral</h3>
+                            <p>Cursos Inscritos: <strong id="total-courses-count">2</strong></p>
+                            <p>Lições Concluídas: <strong id="progresso-lessons-completed">0</strong></p>
+                            <p>Tempo Total de Estudo: <strong id="progresso-time-value">0h 0m</strong></p>
+                            <p>Sua maior Sequência (Streak): <strong id="progresso-streak-value">0</strong> dias</p>
+                        </div>
+                        <div class="progress-chart card">
+                            <h3>Gráfico de Atividade (Simulado)</h3>
+                            <div class="chart-placeholder">
+                                <p>Gráfico de barras mostrando as horas de estudo por semana.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="section-title">Certificados e Conquistas</h2>
+                    <div class="badge-grid">
+                        <div class="badge-item card"><i class="fas fa-medal accent"></i> Concluiu Liderança</div>
+                        <div class="badge-item card"><i class="fas fa-fire success"></i> Streak de 7 Dias</div>
+                        <div class="badge-item card"><i class="fas fa-brain secondary"></i> Mente Afiada</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="comunidade" class="app-screen">
+                <header class="screen-header"><h1>Comunidade</h1></header>
+                <div class="content-area">
+                    <div class="card">
+                        <h3>Fóruns de Discussão</h3>
+                        <p>Participe dos nossos fóruns e tire suas dúvidas com instrutores e outros alunos.</p>
+                        <a href="#" class="btn-secondary"><i class="fas fa-comments"></i> Acessar Fóruns</a>
+                    </div>
+                    <div class="card">
+                        <h3>Encontros Virtuais</h3>
+                        <p>Próxima sessão ao vivo: **Mentoria de Carreira** - 15 de Junho, 19:00h.</p>
+                        <a href="#" class="btn-primary"><i class="fas fa-calendar-alt"></i> Confirmar Presença</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="configuracoes" class="app-screen">
+                <header class="screen-header"><h1>Configurações</h1></header>
+                <div class="content-area">
+                    <div class="card">
+                        <h3>Perfil</h3>
+                        <div class="input-group">
+                            <label for="settings-name">Nome Completo</label>
+                            <input type="text" id="settings-name" value="João Silva">
+                        </div>
+                        <div class="input-group">
+                            <label for="settings-email">E-mail</label>
+                            <input type="email" id="settings-email" value="joao@email.com" disabled>
+                        </div>
+                        <button class="btn-primary mt-3">Salvar Alterações</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>Preferências</h3>
+                        <div class="setting-item">
+                            <span>Modo Escuro</span>
+                            <label class="switch">
+                                <input type="checkbox" id="dark-mode-toggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span>Notificações por E-mail</span>
+                            <label class="switch">
+                                <input type="checkbox" id="email-notifications-toggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span>Reprodução Automática de Vídeos</span>
+                            <label class="switch">
+                                <input type="checkbox" id="autoplay-toggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Avançado</h3>
+                        <div class="setting-item">
+                            <span>Redefinir Progresso</span>
+                            <button class="btn-danger btn-sm" id="reset-progress-btn">
+                                <i class="fas fa-sync-alt"></i> Redefinir
+                            </button>
+                        </div>
+                        <div class="setting-item">
+                            <span>Excluir Conta</span>
+                            <button class="btn-danger btn-sm" id="delete-account-btn">
+                                <i class="fas fa-trash"></i> Excluir Conta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="ajuda" class="app-screen">
+                <header class="screen-header"><h1>Ajuda & FAQ</h1></header>
+                <div class="content-area">
+                    <div class="card">
+                        <h3>Dúvidas Frequentes (FAQ)</h3>
+                        <p>Aqui você encontra as respostas para as perguntas mais comuns sobre a plataforma.</p>
+                        <a href="#" class="btn-secondary"><i class="fas fa-search"></i> Buscar na FAQ</a>
+                    </div>
+                    <div class="card">
+                        <h3>Suporte Técnico</h3>
+                        <p>Precisa de ajuda? Fale conosco através do chat ou e-mail.</p>
+                        <button class="btn-primary"><i class="fas fa-headset"></i> Falar com Suporte</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="mobile-bottom-nav">
+            <div class="mobile-nav-items">
+                <a href="#home" class="mobile-nav-item active" data-screen="home">
+                    <i class="fas fa-home"></i>
+                    <span>Início</span>
+                </a>
+                <a href="#cursos" class="mobile-nav-item" data-screen="cursos">
+                    <i class="fas fa-book-open"></i>
+                    <span>Cursos</span>
+                </a>
+                <a href="#comunidade" class="mobile-nav-item" data-screen="comunidade">
+                    <i class="fas fa-users"></i>
+                    <span>Comunidade</span>
+                </a>
+                <a href="#progresso" class="mobile-nav-item" data-screen="progresso">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progresso</span>
+                </a>
+                <a href="#configuracoes" class="mobile-nav-item" data-screen="configuracoes">
+                    <i class="fas fa-cog"></i>
+                    <span>Config</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script src="app.js" defer></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Registro do Service Worker, movido para o final do body para não bloquear a renderização
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker: Registrado'))
+                    .catch(err => console.error('Service Worker: Falha no Registro', err));
+            });
+        }
+    </script>
+</body>
+
+</html>
